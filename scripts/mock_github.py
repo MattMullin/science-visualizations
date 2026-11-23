@@ -29,6 +29,8 @@ def prepare(path=STATE):
     if errors:
         raise ValueError("Validation failed: " + "; ".join(errors))
     m = json.loads((PROJECT / "manifest.json").read_text(encoding="utf-8"))
+    if m.get("approved"):
+        raise ValueError("This project has already been approved")
     if not (ROOT / m["assets"]["video"]["local_path"]).is_file():
         raise ValueError("MP4 is missing; run the renderer first")
     state = read_state(path)

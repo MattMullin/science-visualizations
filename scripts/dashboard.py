@@ -39,6 +39,11 @@ class Handler(BaseHTTPRequestHandler):
             state = read_state()
             m = json.loads((PROJECT / "manifest.json").read_text(encoding="utf-8"))
             state["caption"] = m["x_caption"]
+            state["project"] = {"published_at": m.get("published_at"),
+                                "approved": m.get("approved"),
+                                "source_url": m["assets"].get("source_url"),
+                                "demo_url": m["assets"].get("demo_url"),
+                                "pull_request_url": m.get("review", {}).get("pull_request_url")}
             calendar = ROOT / "output/calendar.json"
             if not calendar.is_file():
                 generate(calendar)
@@ -55,7 +60,10 @@ class Handler(BaseHTTPRequestHandler):
             if target != base and base not in target.parents:
                 return self.send_error(403)
             ext = target.suffix.lower()
-            typ = {".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".json": "application/json", ".png": "image/png", ".mp4": "video/mp4", ".md": "text/markdown; charset=utf-8"}.get(ext, "application/octet-stream")
+            if target.is_dir():
+                target = target / "index.html"
+                ext = ".html"
+            typ = {".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".json": "application/json", ".geojson": "application/geo+json", ".png": "image/png", ".mp4": "video/mp4", ".md": "text/markdown; charset=utf-8"}.get(ext, "application/octet-stream")
             return self.send_file(target, typ)
         self.send_error(404)
 
@@ -65,6 +73,10 @@ class Handler(BaseHTTPRequestHandler):
             return self.json_response({"error": "Request too large"}, 413)
         try:
             body = json.loads(self.rfile.read(size) or b"{}")
+            if self.path in ("/api/prepare", "/api/approve", "/api/reject"):
+                manifest = json.loads((PROJECT / "manifest.json").read_text(encoding="utf-8"))
+                if manifest.get("published_at"):
+                    raise ValueError("This project is already published")
             if self.path == "/api/prepare":
                 p = prepare()
                 return self.json_response({"message": f"Mock PR #{p['number']} is ready for review"})

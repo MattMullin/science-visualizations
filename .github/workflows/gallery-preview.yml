@@ -21,10 +21,12 @@ jobs:
       - run: python engines/dust/render.py --seconds 20 --fps 20
         if: ${{ hashFiles('projects/001-saharan-dust/manifest.json') != '' }}
       - run: python scripts/build_gallery.py --base-path /science-visualizations/science/
+      - run: python scripts/build_candidate_preview.py 001-saharan-dust
+        if: ${{ hashFiles('projects/001-saharan-dust/manifest.json') != '' }}
       - uses: actions/upload-artifact@v4
         with:
           name: gallery-preview
-          path: dist/science
+          path: output/candidate-preview
           retention-days: 7
       - uses: actions/upload-artifact@v4
         if: ${{ hashFiles('projects/001-saharan-dust/manifest.json') != '' }}
