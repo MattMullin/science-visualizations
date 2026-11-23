@@ -1,13 +1,12 @@
 # Science Visualizations
 
 An open-source science visualization atlas designed for a 180-day publishing
-series. The reference project is [Saharan Dust](projects/001-saharan-dust/README.md),
-currently under review in [draft PR #1](https://github.com/MattMullin/science-visualizations/pull/1).
+series. The first published project is [Saharan Dust](projects/001-saharan-dust/README.md),
+released on 23 November 2026. Explore it in the [public gallery](https://mattmullin.github.io/science-visualizations/science/).
 
 This checkout contains the **public project package and reusable renderer**.
 The private scheduling, credential and long-running worker infrastructure is
-kept outside this public repository. The current reference is a candidate, not
-an approved release.
+kept outside this public repository.
 
 ## Reference workflow
 
@@ -18,13 +17,13 @@ python -m pip install -r requirements.txt
 python scripts/validate.py
 python -m pytest -q
 python engines/dust/render.py --seconds 20 --fps 20
-python scripts/mock_github.py prepare
+python scripts/build_gallery.py --base-path /science-visualizations/science/
 python scripts/dashboard.py
 ```
 
-Open `http://127.0.0.1:8765/` to inspect the video, source, limits and mock PR.
-The dashboard can record natural-language feedback, reject a candidate, or
-**simulate** approval. Simulated approval builds a local gallery under
+Open `http://127.0.0.1:8765/` to inspect the video, source and limits.
+For future unapproved candidates, the dashboard can record natural-language
+feedback, reject a candidate, or **simulate** approval. Simulated approval builds a local gallery under
 `output/mock-gallery/science/`. It never changes public approval status,
 contacts GitHub, or publishes to X. The public gallery publishes cards only
 for manifests with `approved: true`, a publication date, and a public project
@@ -53,7 +52,8 @@ GitHub App token, because PRs created by the standard Actions `GITHUB_TOKEN`
 do not trigger downstream PR workflows.
 
 Large MP4s and scientific source datasets are excluded from Git history.
-Release media needs external storage and URL assignment before publication.
+The first MP4 is stored as a GitHub Release asset; future releases need the
+same external-media step before publication.
 The small frozen model snapshot is committed to make the renderer reproducible.
 
 ## Release rule
@@ -65,17 +65,15 @@ buffer target and three-candidate daily budget are in `backlog.json`. Ideas
 require dataset and scientific review before production. The daily planner is
 not active production automation yet.
 
-`python scripts/generate_calendar.py` creates a tentative 180-day calendar
-starting 1 December 2026. It includes fields for PRs, reviews, media, X
+`python scripts/generate_calendar.py` creates a 180-day calendar
+starting 23 November 2026. It includes fields for PRs, reviews, media, X
 performance and GitHub metrics; collection and publishing remain manual until
 authenticated integrations are configured.
 
 ## Current status
 
 The Saharan dust source snapshot, renderer, 20-second MP4, thumbnail,
-documentation and local review flow have been built and reproduced from a
-fresh checkout. The public repository and draft PR exist, and GitHub Actions
-checks pass. The production external worker queue, custom domain, hosted
-interactive demo and X analytics still require service setup. The project
-remains unapproved, unmerged and absent from the public gallery.
+documentation and interactive demo have been reproduced from a fresh checkout.
+This is release 1 of 180. The external daily worker, custom domain and X
+analytics still require service setup. No X post is published automatically.
 

@@ -39,6 +39,11 @@ class Handler(BaseHTTPRequestHandler):
             state = read_state()
             m = json.loads((PROJECT / "manifest.json").read_text(encoding="utf-8"))
             state["caption"] = m["x_caption"]
+            state["project"] = {"published_at": m.get("published_at"),
+                                "approved": m.get("approved"),
+                                "source_url": m["assets"].get("source_url"),
+                                "demo_url": m["assets"].get("demo_url"),
+                                "pull_request_url": m.get("review", {}).get("pull_request_url")}
             calendar = ROOT / "output/calendar.json"
             if not calendar.is_file():
                 generate(calendar)
@@ -68,6 +73,10 @@ class Handler(BaseHTTPRequestHandler):
             return self.json_response({"error": "Request too large"}, 413)
         try:
             body = json.loads(self.rfile.read(size) or b"{}")
+            if self.path in ("/api/prepare", "/api/approve", "/api/reject"):
+                manifest = json.loads((PROJECT / "manifest.json").read_text(encoding="utf-8"))
+                if manifest.get("published_at"):
+                    raise ValueError("This project is already published")
             if self.path == "/api/prepare":
                 p = prepare()
                 return self.json_response({"message": f"Mock PR #{p['number']} is ready for review"})

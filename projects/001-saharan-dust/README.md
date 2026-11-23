@@ -55,14 +55,10 @@ licenses before redistribution or commercial use.
 ## Outputs and review
 
 `manifest.json` inventories the data, code, thumbnail, video and attribution.
-The MP4 is destined for external object storage or a GitHub release after
-approval. `assets/thumbnail.png` is checked in. No interactive demo has been
-published yet; `demo/index.html` provides a static interactive time explorer
-that the local preview can display. The demo can be deployed after approval
-and merge; the gallery card appears on its publication date.
-
-The project is a **candidate**. It needs scientific and editorial review before
-merging or public release. A pull request should include its data source,
-preview, validation result and deployment preview. The generated X caption is
-in the manifest and must be posted manually after explicit approval.
+The [20-second MP4](https://github.com/MattMullin/science-visualizations/releases/download/day-001-saharan-dust/saharan-dust.mp4)
+is stored as a GitHub Release asset. `assets/thumbnail.png` is checked in.
+The [interactive time explorer](https://mattmullin.github.io/science-visualizations/science/assets/001-saharan-dust/demo/)
+is served with the public gallery. The [project source](https://github.com/MattMullin/science-visualizations/tree/main/projects/001-saharan-dust)
+includes all reproduction instructions. The ready-to-publish X caption is in
+the manifest; posting to X still requires a separate explicit action.
 

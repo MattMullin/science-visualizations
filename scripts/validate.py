@@ -36,6 +36,10 @@ def validate(project: Path):
         errors.append("published project must be approved")
     if m.get("published_at") and not m.get("assets", {}).get("video", {}).get("url"):
         errors.append("published project needs an external video URL")
+    if m.get("published_at") and demo_path and not m.get("assets", {}).get("demo_url"):
+        errors.append("published interactive demo needs a public URL")
+    if m.get("published_at") and m.get("status") != "published":
+        errors.append("published project status mismatch")
     thumb = project / m.get("assets", {}).get("thumbnail", "")
     if not thumb.is_file():
         errors.append(f"missing thumbnail {thumb}")

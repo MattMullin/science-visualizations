@@ -4,9 +4,14 @@
   "number": 1,
   "title": "Saharan Dust",
   "summary": "A 72-hour view of modeled near-surface mineral dust over North Africa and the western Mediterranean.",
-  "status": "candidate",
-  "approved": false,
-  "published_at": null,
+  "status": "published",
+  "approved": true,
+  "published_at": "2026-11-23",
+  "review": {
+    "pull_request_url": "https://github.com/MattMullin/science-visualizations/pull/1",
+    "approved_at": "2026-11-23",
+    "status": "approved"
+  },
   "data": {
     "name": "CAMS European Air Quality Forecast — dust",
     "provider": "Copernicus Atmosphere Monitoring Service (CAMS)",
@@ -26,15 +31,15 @@
     "thumbnail_sha256": "a8a54c504f3c9ef5b398f74c1e1e12d31ee64dbdf461cdb3c1491a62635ecc65",
     "video": {
       "local_path": "output/001-saharan-dust/saharan-dust.mp4",
-      "url": null,
+      "url": "https://github.com/MattMullin/science-visualizations/releases/download/day-001-saharan-dust/saharan-dust.mp4",
       "duration_seconds": 20,
       "sha256": "30b48b8071a7edc568b8a42115a0337fe200c07fa763f449a42a4367d616fd29",
-      "storage": "external release asset after approval"
+      "storage": "GitHub Release asset day-001-saharan-dust"
     },
-    "demo_url": null,
+    "demo_url": "https://mattmullin.github.io/science-visualizations/science/assets/001-saharan-dust/demo/",
     "demo_path": "demo/index.html",
     "demo_sha256": "f317c0ee1f7b0c76b6234d96ae456d47f2b823f31fb96c90c37385c4765ef380",
-    "source_url": null
+    "source_url": "https://github.com/MattMullin/science-visualizations/tree/main/projects/001-saharan-dust"
   },
   "provenance": {
     "renderer": "engines/dust/render.py",
@@ -45,5 +50,5 @@
     "basemap_license": "Natural Earth public domain",
     "render_command": "python engines/dust/render.py --seconds 20 --fps 20"
   },
-  "x_caption": "Watch modeled Saharan dust shift across North Africa and the western Mediterranean over 72 hours. Based on CAMS European near-surface dust forecasts, accessed via Open-Meteo. Explore the data and code: {project_url} #ScienceVisualization #SaharanDust"
+  "x_caption": "Watch modeled Saharan dust shift across North Africa and the western Mediterranean over 72 hours. Based on CAMS European near-surface dust forecasts, accessed via Open-Meteo. Explore the data and code: https://github.com/MattMullin/science-visualizations/tree/main/projects/001-saharan-dust #ScienceVisualization #SaharanDust"
 }
