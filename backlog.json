@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "target_count": 180,
+  "candidate_limit_per_day": 3,
+  "approved_buffer_target": 7,
+  "projects": [
+    {"number": 1, "slug": "saharan-dust", "engine": "dust", "status": "candidate"},
+    {"number": 2, "slug": "atmospheric-rivers", "engine": "globe", "status": "backlog"},
+    {"number": 3, "slug": "ocean-currents", "engine": "particles", "status": "backlog"}
+  ]
+}

@@ -1,0 +1,12 @@
+__pycache__/
+.pytest_cache/
+.venv/
+dist/
+output/
+.local/
+private-automation/
+*.mp4
+*.mov
+*.webm
+.env
+
