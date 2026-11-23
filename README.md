@@ -60,9 +60,10 @@ The small frozen model snapshot is committed to make the renderer reproducible.
 
 Scientific and editorial review, a human PR approval, a working media URL,
 and a valid public source URL are required before marking a manifest approved
-and merging. No workflow posts to X. The seven-project buffer and three
-candidate daily budget are targets in `backlog.json`; they are not active
-production automation yet.
+and merging. No workflow posts to X. The 180 candidate ideas, seven-project
+buffer target and three-candidate daily budget are in `backlog.json`. Ideas
+require dataset and scientific review before production. The daily planner is
+not active production automation yet.
 
 `python scripts/generate_calendar.py` creates a tentative 180-day calendar
 starting 1 December 2026. It includes fields for PRs, reviews, media, X
