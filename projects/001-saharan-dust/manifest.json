@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "001-saharan-dust",
+  "number": 1,
+  "title": "Saharan Dust",
+  "summary": "A 72-hour view of modeled near-surface mineral dust over North Africa and the western Mediterranean.",
+  "status": "candidate",
+  "approved": false,
+  "published_at": null,
+  "data": {
+    "name": "CAMS European Air Quality Forecast — dust",
+    "provider": "Copernicus Atmosphere Monitoring Service (CAMS)",
+    "access": "Open-Meteo Air Quality API",
+    "source_url": "https://open-meteo.com/en/docs/air-quality-api",
+    "original_source_url": "https://atmosphere.copernicus.eu/",
+    "snapshot": "data/dust_snapshot.json",
+    "snapshot_sha256": "fd9f0e0d06a3e63d989e302053ead1a8f0edd89bbe99f63b2f7182b97c987a59",
+    "variable": "dust",
+    "units": "μg/m³",
+    "event_date": "2026-08-27",
+    "model_domain": "cams_europe",
+    "limitations": "Forecast model output near 10 m above ground, not direct satellite observation or a measure of total atmospheric dust. Spatial interpolation is for display and does not increase model resolution."
+  },
+  "assets": {
+    "thumbnail": "assets/thumbnail.png",
+    "thumbnail_sha256": "a8a54c504f3c9ef5b398f74c1e1e12d31ee64dbdf461cdb3c1491a62635ecc65",
+    "video": {
+      "local_path": "output/001-saharan-dust/saharan-dust.mp4",
+      "url": null,
+      "duration_seconds": 20,
+      "sha256": "30b48b8071a7edc568b8a42115a0337fe200c07fa763f449a42a4367d616fd29",
+      "storage": "external release asset after approval"
+    },
+    "demo_url": null,
+    "source_url": null
+  },
+  "provenance": {
+    "renderer": "engines/dust/render.py",
+    "retriever": "projects/001-saharan-dust/fetch_data.py",
+    "basemap": "shared/ne_110m_land.geojson",
+    "basemap_sha256": "9e0729ee253ca7d7a5c4ae9395fb1902264c5377c52e224d13dd85010e2835d9",
+    "basemap_source": "https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_land.geojson",
+    "basemap_license": "Natural Earth public domain",
+    "render_command": "python engines/dust/render.py --seconds 20 --fps 20"
+  },
+  "x_caption": "Watch modeled Saharan dust shift across North Africa and the western Mediterranean over 72 hours. Based on CAMS European near-surface dust forecasts, accessed via Open-Meteo. Explore the data and code: {project_url} #ScienceVisualization #SaharanDust"
+}
