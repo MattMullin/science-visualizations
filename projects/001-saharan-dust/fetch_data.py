@@ -96,7 +96,7 @@ def fetch(day=None):
         "points": rows,
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    OUT.write_bytes((json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n").encode("utf-8"))
     print(f"Saved {len(rows)} locations × {len(times)} hours; event {day}: {OUT}")
     print(f"SHA256 {hashlib.sha256(OUT.read_bytes()).hexdigest()}")
 

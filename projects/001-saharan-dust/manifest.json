@@ -14,7 +14,7 @@
     "source_url": "https://open-meteo.com/en/docs/air-quality-api",
     "original_source_url": "https://atmosphere.copernicus.eu/",
     "snapshot": "data/dust_snapshot.json",
-    "snapshot_sha256": "fd9f0e0d06a3e63d989e302053ead1a8f0edd89bbe99f63b2f7182b97c987a59",
+    "snapshot_sha256": "e671e86b0f6e1fbbf5c480b36222546c2cbf542ee3e539012e508551a4f9adcd",
     "variable": "dust",
     "units": "μg/m³",
     "event_date": "2026-08-27",
