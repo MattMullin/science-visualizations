@@ -26,8 +26,10 @@ Open `http://127.0.0.1:8765/` to inspect the video, source, limits and mock PR.
 The dashboard can record natural-language feedback, reject a candidate, or
 **simulate** approval. Simulated approval builds a local gallery under
 `output/mock-gallery/science/`. It never changes public approval status,
-contacts GitHub, or publishes to X. The public gallery build uses only
-manifests with `approved: true` and a public project URL:
+contacts GitHub, or publishes to X. The public gallery publishes cards only
+for manifests with `approved: true`, a publication date, and a public project
+URL. Approved but unpublished projects can have a deployed demo while they sit
+in the seven-project buffer:
 
 ```powershell
 python scripts/build_gallery.py --base-path /science-visualizations/science/

@@ -30,8 +30,12 @@ def validate(project: Path):
     for key in ("name", "provider", "source_url", "original_source_url", "variable", "units", "limitations"):
         if not m.get("data", {}).get(key):
             errors.append(f"missing data.{key}")
-    if m.get("approved") and (not m.get("published_at") or not m.get("assets", {}).get("source_url")):
-        errors.append("approved manifest needs publication date and public source URL")
+    if m.get("approved") and not m.get("assets", {}).get("source_url"):
+        errors.append("approved manifest needs a public source URL")
+    if m.get("published_at") and not m.get("approved"):
+        errors.append("published project must be approved")
+    if m.get("published_at") and not m.get("assets", {}).get("video", {}).get("url"):
+        errors.append("published project needs an external video URL")
     thumb = project / m.get("assets", {}).get("thumbnail", "")
     if not thumb.is_file():
         errors.append(f"missing thumbnail {thumb}")

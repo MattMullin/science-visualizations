@@ -58,8 +58,8 @@ licenses before redistribution or commercial use.
 The MP4 is destined for external object storage or a GitHub release after
 approval. `assets/thumbnail.png` is checked in. No interactive demo has been
 published yet; `demo/index.html` provides a static interactive time explorer
-that the local preview can display. It will be included in the public gallery
-after approval and merge.
+that the local preview can display. The demo can be deployed after approval
+and merge; the gallery card appears on its publication date.
 
 The project is a **candidate**. It needs scientific and editorial review before
 merging or public release. A pull request should include its data source,

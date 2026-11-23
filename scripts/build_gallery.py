@@ -25,7 +25,7 @@ def build(out: Path, base_path="/science/", mock_state=None):
         is_mock = project.name in mock_approved
         if not m.get("approved") and not is_mock:
             continue
-        if not is_mock and (not m.get("published_at") or not m.get("assets", {}).get("source_url")):
+        if not is_mock and not m.get("assets", {}).get("source_url"):
             raise ValueError(f"Incomplete approved manifest: {project.name}")
         thumb = project / m["assets"]["thumbnail"]
         if not thumb.is_file():
@@ -45,6 +45,10 @@ def build(out: Path, base_path="/science/", mock_state=None):
             shutil.copy2(demo_source, demo_dest / "index.html")
             shutil.copy2(project / m["data"]["snapshot"], demo_dest / "dust_snapshot.json")
             shutil.copy2(ROOT / m["provenance"]["basemap"], demo_dest / "ne_110m_land.geojson")
+        # An approved, unpublished project can have a demo URL for review while
+        # remaining absent from the public catalog until its release date.
+        if not is_mock and not m.get("published_at"):
+            continue
         card = {"id": m["id"], "title": m["title"], "summary": m["summary"],
                 "date": m["published_at"] or ("LOCAL DEMO" if is_mock else ""), "dataset": m["data"]["name"],
                 "provider": m["data"]["provider"],

@@ -1,11 +1,30 @@
 import json
+import shutil
 
-from scripts.build_gallery import build
+import scripts.build_gallery as gallery
+
+build = gallery.build
 
 
 def test_unapproved_candidate_is_excluded(tmp_path):
     build(tmp_path / "public", "/science/")
     assert json.loads((tmp_path / "public/catalog.json").read_text()) == []
+
+
+def test_approved_unpublished_demo_is_deployed_but_unlisted(tmp_path, monkeypatch):
+    root = tmp_path / "repo"
+    shutil.copytree(gallery.ROOT / "gallery", root / "gallery")
+    shutil.copytree(gallery.ROOT / "projects", root / "projects")
+    shutil.copytree(gallery.ROOT / "shared", root / "shared")
+    manifest = root / "projects/001-saharan-dust/manifest.json"
+    data = json.loads(manifest.read_text(encoding="utf-8"))
+    data["approved"] = True
+    data["assets"]["source_url"] = "https://github.com/example/science-visualizations/tree/main/projects/001-saharan-dust"
+    manifest.write_text(json.dumps(data), encoding="utf-8")
+    monkeypatch.setattr(gallery, "ROOT", root)
+    build(root / "dist/science", "/science/")
+    assert json.loads((root / "dist/science/catalog.json").read_text()) == []
+    assert (root / "dist/science/assets/001-saharan-dust/demo/index.html").is_file()
 
 
 def test_mock_approval_only_affects_local_demo(tmp_path):
