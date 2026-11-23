@@ -15,5 +15,7 @@ def test_mock_approval_only_affects_local_demo(tmp_path):
     catalog = json.loads((tmp_path / "demo/catalog.json").read_text())
     assert len(catalog) == 1
     assert catalog[0]["date"] == "LOCAL DEMO"
+    assert catalog[0]["demo"] == "assets/001-saharan-dust/demo/"
+    assert (tmp_path / "demo/assets/001-saharan-dust/demo/dust_snapshot.json").is_file()
     build(tmp_path / "public", "/science/")
     assert json.loads((tmp_path / "public/catalog.json").read_text()) == []

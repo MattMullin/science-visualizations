@@ -35,12 +35,22 @@ def build(out: Path, base_path="/science/", mock_state=None):
         shutil.copy2(thumb, destination / "thumbnail.png")
         if is_mock:
             shutil.copy2(project / "README.md", destination / "README.md")
+        demo_path = m["assets"].get("demo_path")
+        if demo_path:
+            demo_source = project / demo_path
+            if not demo_source.is_file():
+                raise ValueError(f"Missing interactive demo: {demo_source}")
+            demo_dest = destination / "demo"
+            demo_dest.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(demo_source, demo_dest / "index.html")
+            shutil.copy2(project / m["data"]["snapshot"], demo_dest / "dust_snapshot.json")
+            shutil.copy2(ROOT / m["provenance"]["basemap"], demo_dest / "ne_110m_land.geojson")
         card = {"id": m["id"], "title": m["title"], "summary": m["summary"],
                 "date": m["published_at"] or ("LOCAL DEMO" if is_mock else ""), "dataset": m["data"]["name"],
                 "provider": m["data"]["provider"],
                 "thumbnail": f"assets/{project.name}/thumbnail.png",
                 "video": m["assets"]["video"].get("url"),
-                "demo": m["assets"].get("demo_url"),
+                "demo": m["assets"].get("demo_url") or (f"assets/{project.name}/demo/" if demo_path else None),
                 "source": m["assets"]["source_url"] or f"assets/{project.name}/README.md",
                 "dataset_url": m["data"]["source_url"]}
         card["source_label"] = "Local source package" if is_mock else "GitHub source"

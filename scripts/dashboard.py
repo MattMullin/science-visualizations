@@ -55,7 +55,10 @@ class Handler(BaseHTTPRequestHandler):
             if target != base and base not in target.parents:
                 return self.send_error(403)
             ext = target.suffix.lower()
-            typ = {".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".json": "application/json", ".png": "image/png", ".mp4": "video/mp4", ".md": "text/markdown; charset=utf-8"}.get(ext, "application/octet-stream")
+            if target.is_dir():
+                target = target / "index.html"
+                ext = ".html"
+            typ = {".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".json": "application/json", ".geojson": "application/geo+json", ".png": "image/png", ".mp4": "video/mp4", ".md": "text/markdown; charset=utf-8"}.get(ext, "application/octet-stream")
             return self.send_file(target, typ)
         self.send_error(404)
 

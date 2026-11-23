@@ -32,6 +32,8 @@
       "storage": "external release asset after approval"
     },
     "demo_url": null,
+    "demo_path": "demo/index.html",
+    "demo_sha256": "f317c0ee1f7b0c76b6234d96ae456d47f2b823f31fb96c90c37385c4765ef380",
     "source_url": null
   },
   "provenance": {

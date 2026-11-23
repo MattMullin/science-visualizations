@@ -22,6 +22,11 @@ def validate(project: Path):
     for filename in ("README.md", "PROMPT.md", "fetch_data.py"):
         if not (project / filename).is_file():
             errors.append(f"missing {filename}")
+    demo_path = m.get("assets", {}).get("demo_path")
+    if demo_path and not (project / demo_path).is_file():
+        errors.append(f"missing interactive demo {demo_path}")
+    elif demo_path and hashlib.sha256((project / demo_path).read_bytes()).hexdigest() != m["assets"].get("demo_sha256"):
+        errors.append("interactive demo checksum mismatch")
     for key in ("name", "provider", "source_url", "original_source_url", "variable", "units", "limitations"):
         if not m.get("data", {}).get(key):
             errors.append(f"missing data.{key}")

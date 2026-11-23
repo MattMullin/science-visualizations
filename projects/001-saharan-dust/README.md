@@ -57,7 +57,9 @@ licenses before redistribution or commercial use.
 `manifest.json` inventories the data, code, thumbnail, video and attribution.
 The MP4 is destined for external object storage or a GitHub release after
 approval. `assets/thumbnail.png` is checked in. No interactive demo has been
-published yet; the local gallery can display the project after a mock approval.
+published yet; `demo/index.html` provides a static interactive time explorer
+that the local preview can display. It will be included in the public gallery
+after approval and merge.
 
 The project is a **candidate**. It needs scientific and editorial review before
 merging or public release. A pull request should include its data source,
