@@ -1,7 +1,8 @@
 # Science Visualizations
 
 An open-source science visualization atlas designed for a 180-day publishing
-series. The reference project is [Saharan Dust](projects/001-saharan-dust/README.md).
+series. The reference project is [Saharan Dust](projects/001-saharan-dust/README.md),
+currently under review in [draft PR #1](https://github.com/MattMullin/science-visualizations/pull/1).
 
 This checkout contains the **public project package and reusable renderer**.
 The private scheduling, credential and long-running worker infrastructure is
@@ -69,7 +70,9 @@ authenticated integrations are configured.
 ## Current status
 
 The Saharan dust source snapshot, renderer, 20-second MP4, thumbnail,
-documentation and local review flow have been built. Public repository
-creation, authenticated PR submission, external worker queue, hosted domain,
-and X analytics still require service setup and human publication approval.
+documentation and local review flow have been built and reproduced from a
+fresh checkout. The public repository and draft PR exist, and GitHub Actions
+checks pass. The production external worker queue, custom domain, hosted
+interactive demo and X analytics still require service setup. The project
+remains unapproved, unmerged and absent from the public gallery.
 
